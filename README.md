@@ -102,7 +102,9 @@ This command uses the `mongorestore` tool to unpack the downloaded archive (`sam
                    "numDimensions": 1536,
                    "path": "plot_embedding",
                    "similarity": "cosine"
-               }
+               },
+               {"type":"filter","path":"genres"},
+               {"type":"filter","path":"type"}
            ]
        }
    );
