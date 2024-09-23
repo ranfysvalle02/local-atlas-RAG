@@ -147,7 +147,106 @@ Once the index is ready, you can proceed to the QnA section (not included here) 
 
 ## Sample code for RAG
 ```python
+import pymongo
+from langchain.embeddings import AzureOpenAIEmbeddings
 
+MONGODB_URI = ""
+client = pymongo.MongoClient(MONGODB_URI)
+db = client["sample_mflix"]
+collection = db["embedded_movies"]
+
+azureEmbeddings = AzureOpenAIEmbeddings(
+            deployment="",
+            model="text-embedding-ada-002",
+            openai_api_base="",
+            openai_api_key="",
+            openai_api_type="azure"
+)
+
+"""
+MongoDB Atlas Vector Search Definition
+{
+  "mappings": {
+    "dynamic": true,
+    "fields": {
+      "plot_embedding": {
+        "dimensions": 1536,
+        "similarity": "cosine",
+        "type": "knnVector"
+      },
+      "genres": {
+        "normalizer": "lowercase",
+        "type": "token"
+      },
+      "type": {
+        "normalizer": "lowercase",
+        "type": "token"
+      }
+    }
+  }
+}
+"""
+
+#the $vectorSearch filter option matches only BSON boolean, string, and numeric values 
+# so you must index the fields as one of the following Atlas Search field types.
+LOCAL_ACL = {
+     "UserA":{
+          "genres":{"$eq":"Horror"}, # only has access to horror movies
+     },
+     "UserB":{
+          "genres":{"$in":["Romance","Comedy"]}, # only has access to romance movies
+     },
+     "UserC":{
+          "type":{"$ne":"movie"}, # only has access to non-movies
+     }
+}
+
+def vs_tool(text,user_id):
+        #$vectorSearch
+        chunk_max_length = 1000
+        response = collection.aggregate([
+        {
+            "$vectorSearch": {
+                "index": "default",
+                "queryVector": azureEmbeddings.embed_query(text),
+                "path": "plot_embedding",
+                "filter": LOCAL_ACL[str(user_id)],
+                "limit": 5, #Number (of type int only) of documents to return in the results. Value can't exceed the value of numCandidates.
+                "numCandidates": 30 #Number of nearest neighbors to use during the search. You can't specify a number less than the number of documents to return (limit).
+            }
+        },{"$project":{"_id":0, "title":1, "genres":1, "released":1, "type":1}},{"$sort":{"released":-1,"awards.wins":-1}}
+       ])
+        str_response = []
+        for d in response:
+            str_response.append({"title":d["title"],"genres":d["genres"],"released":d["released"],"type":d["type"]})
+        
+        if len(str_response)>0:
+            return f"Knowledgebase Results for User={user_id} [{len(str_response)}]:\n{str(str_response)}\n"
+        else:
+            return "N/A"
+
+       
+print(
+    vs_tool("Santa Claus is coming to town", "UserA")
+)
+
+      
+print(
+    vs_tool("Santa Claus is coming to town", "UserB")
+)
+
+      
+print(
+    vs_tool("Santa Claus is coming to town", "UserC")
+)
+"""
+Knowledgebase Results for User=UserA [5]:
+[{'title': 'Jack Frost 2: Revenge of the Mutant Killer Snowman'}, {'title': 'Jack Frost 2: Revenge of the Mutant Killer Snowman'}, {'title': 'Rare Exports: A Christmas Tale'}, {'title': 'Carny'}, {'title': 'The Witches of Eastwick'}]
+Knowledgebase Results for User=UserB [5]:
+[{'title': 'Cancel Christmas'}, {'title': 'Santa Who?'}, {'title': 'Mrs. Santa Claus'}, {'title': 'The Perfect Holiday'}, {'title': "Beethoven's Christmas Adventure"}]
+Knowledgebase Results for User=UserC [5]:
+[{'title': 'The Storyteller'}, {'title': 'Tin Man'}, {'title': "Dead Man's Walk"}, {'title': "Gulliver's Travels"}, {'title': 'Going Postal'}]
+"""
 ```
 
 ## Reference Architechture 
