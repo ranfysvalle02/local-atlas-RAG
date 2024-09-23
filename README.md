@@ -145,6 +145,11 @@ This command uses the `mongorestore` tool to unpack the downloaded archive (`sam
 
 Once the index is ready, you can proceed to the QnA section (not included here) to start asking questions based on the sample data and receive relevant responses.
 
+## Sample code for RAG
+```python
+
+```
+
 ## Reference Architechture 
 
 ![image](https://github.com/mongodb-partners/MongoDB-RAG-Vercel/assets/114057324/3a4b863e-cea3-4d89-a6f5-24a4ee44cfd4)
