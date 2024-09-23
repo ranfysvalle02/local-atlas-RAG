@@ -1,5 +1,7 @@
 # local-atlas-RAG
 
+![demo.png](demo.png)
+
 This README guides you through setting up a local Retrieval-Augmented Generation (RAG) environment with MongoDB Atlas and sample datasets.
 
 ### Prerequisites
