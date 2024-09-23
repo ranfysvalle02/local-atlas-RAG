@@ -19,11 +19,6 @@ This README guides you through setting up a local Retrieval-Augmented Generation
      ```bash
      docker pull mongodb/mongodb-atlas-local
      ```
-   * **Specific Version:**
-     ```bash
-     docker pull mongodb/mongodb-atlas-local:<tag>
-     ```
-     Replace `<tag>` with the desired version.
 
 2. **Run the Database:**
 
