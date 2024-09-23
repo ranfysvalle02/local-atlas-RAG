@@ -150,20 +150,17 @@ Once the index is ready, you can proceed to the QnA section (not included here) 
 ## Sample code for RAG
 ```python
 import pymongo
-from langchain.embeddings import AzureOpenAIEmbeddings
+from openai import AzureOpenAI
 
-MONGODB_URI = ""
+MONGODB_URI = "mongodb://localhost/?directConnection=true"
 client = pymongo.MongoClient(MONGODB_URI)
 db = client["sample_mflix"]
 collection = db["embedded_movies"]
 
-azureEmbeddings = AzureOpenAIEmbeddings(
-            deployment="",
-            model="text-embedding-ada-002",
-            openai_api_base="",
-            openai_api_key="",
-            openai_api_type="azure"
-)
+AZURE_OPENAI_ENDPOINT = ""
+AZURE_OPENAI_API_KEY = "" 
+deployment_name = "text-embedding-ada-002"  # The name of your model deployment
+az_client = AzureOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT,api_version="2023-07-01-preview",api_key=AZURE_OPENAI_API_KEY)
 
 #the $vectorSearch filter option matches only BSON boolean, string, and numeric values 
 # so you must index the fields as one of the following Atlas Search field types.
@@ -185,8 +182,8 @@ def vs_tool(text,user_id):
         response = collection.aggregate([
         {
             "$vectorSearch": {
-                "index": "default",
-                "queryVector": azureEmbeddings.embed_query(text),
+                "index": "vector_index",
+                "queryVector": az_client.embeddings.create(model=deployment_name,input=text).data[0].embedding,
                 "path": "plot_embedding",
                 "filter": LOCAL_ACL[str(user_id)],
                 "limit": 5, #Number (of type int only) of documents to return in the results. Value can't exceed the value of numCandidates.
