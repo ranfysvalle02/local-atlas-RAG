@@ -163,30 +163,6 @@ azureEmbeddings = AzureOpenAIEmbeddings(
             openai_api_type="azure"
 )
 
-"""
-MongoDB Atlas Vector Search Definition
-{
-  "mappings": {
-    "dynamic": true,
-    "fields": {
-      "plot_embedding": {
-        "dimensions": 1536,
-        "similarity": "cosine",
-        "type": "knnVector"
-      },
-      "genres": {
-        "normalizer": "lowercase",
-        "type": "token"
-      },
-      "type": {
-        "normalizer": "lowercase",
-        "type": "token"
-      }
-    }
-  }
-}
-"""
-
 #the $vectorSearch filter option matches only BSON boolean, string, and numeric values 
 # so you must index the fields as one of the following Atlas Search field types.
 LOCAL_ACL = {
