@@ -143,11 +143,8 @@ This command uses the `mongorestore` tool to unpack the downloaded archive (`sam
    ]
    ```
 
-**Next Steps:**
 
-Once the index is ready, you can proceed to the QnA section (not included here) to start asking questions based on the sample data and receive relevant responses.
-
-## Sample code for RAG
+## Sample code for RAG using Access Control List and Filters
 ```python
 import pymongo
 from openai import AzureOpenAI
