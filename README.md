@@ -213,11 +213,13 @@ print(
 )
 """
 Knowledgebase Results for User=UserA [5]:
-[{'title': 'Jack Frost 2: Revenge of the Mutant Killer Snowman'}, {'title': 'Jack Frost 2: Revenge of the Mutant Killer Snowman'}, {'title': 'Rare Exports: A Christmas Tale'}, {'title': 'Carny'}, {'title': 'The Witches of Eastwick'}]
+[{'title': 'Rare Exports: A Christmas Tale', 'genres': ['Adventure', 'Fantasy', 'Horror'], 'released': datetime.datetime(2010, 12, 3, 0, 0), 'type': 'movie'}, {'title': 'Carny', 'genres': ['Fantasy', 'Horror', 'Sci-Fi'], 'released': datetime.datetime(2009, 4, 25, 0, 0), 'type': 'movie'}, {'title': 'Jack Frost 2: Revenge of the Mutant Killer Snowman', 'genres': ['Comedy', 'Fantasy', 'Horror'], 'released': datetime.datetime(2006, 2, 9, 0, 0), 'type': 'movie'}, {'title': 'Jack Frost 2: Revenge of the Mutant Killer Snowman', 'genres': ['Comedy', 'Fantasy', 'Horror'], 'released': datetime.datetime(2006, 2, 9, 0, 0), 'type': 'movie'}, {'title': 'The Witches of Eastwick', 'genres': ['Comedy', 'Fantasy', 'Horror'], 'released': datetime.datetime(1987, 6, 12, 0, 0), 'type': 'movie'}]
+
 Knowledgebase Results for User=UserB [5]:
-[{'title': 'Cancel Christmas'}, {'title': 'Santa Who?'}, {'title': 'Mrs. Santa Claus'}, {'title': 'The Perfect Holiday'}, {'title': "Beethoven's Christmas Adventure"}]
+[{'title': 'Cancel Christmas', 'genres': ['Comedy', 'Family', 'Fantasy'], 'released': datetime.datetime(2011, 11, 13, 0, 0), 'type': 'movie'}, {'title': "Beethoven's Christmas Adventure", 'genres': ['Comedy', 'Fantasy'], 'released': datetime.datetime(2011, 11, 8, 0, 0), 'type': 'movie'}, {'title': 'The Perfect Holiday', 'genres': ['Comedy', 'Family', 'Fantasy'], 'released': datetime.datetime(2007, 12, 12, 0, 0), 'type': 'movie'}, {'title': 'Santa Who?', 'genres': ['Comedy', 'Fantasy'], 'released': datetime.datetime(2000, 11, 19, 0, 0), 'type': 'movie'}, {'title': 'Mrs. Santa Claus', 'genres': ['Comedy', 'Family', 'Fantasy'], 'released': datetime.datetime(1996, 12, 8, 0, 0), 'type': 'movie'}]
+
 Knowledgebase Results for User=UserC [5]:
-[{'title': 'The Storyteller'}, {'title': 'Tin Man'}, {'title': "Dead Man's Walk"}, {'title': "Gulliver's Travels"}, {'title': 'Going Postal'}]
+[{'title': 'Going Postal', 'genres': ['Comedy', 'Fantasy', 'Mystery'], 'released': datetime.datetime(2010, 5, 30, 0, 0), 'type': 'series'}, {'title': 'Tin Man', 'genres': ['Adventure', 'Fantasy', 'Sci-Fi'], 'released': datetime.datetime(2007, 12, 2, 0, 0), 'type': 'series'}, {'title': "Dead Man's Walk", 'genres': ['Western'], 'released': datetime.datetime(1996, 5, 12, 0, 0), 'type': 'series'}, {'title': "Gulliver's Travels", 'genres': ['Adventure', 'Family', 'Fantasy'], 'released': datetime.datetime(1996, 2, 4, 0, 0), 'type': 'series'}, {'title': 'The Storyteller', 'genres': ['Fantasy'], 'released': datetime.datetime(1989, 4, 28, 0, 0), 'type': 'series'}]
 """
 ```
 
