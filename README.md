@@ -4,8 +4,12 @@ This README guides you through setting up a local Retrieval-Augmented Generation
 
 ### Prerequisites
 
-* Docker installed on your system ([https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/))
-* `wget` or `curl` installed on your system (package managers usually handle this)
+* **MongoDB Tools:**
+  * **mongosh:** The official MongoDB shell for interacting with MongoDB databases.
+  * **mongorestore:** A tool for restoring data from a dump file to a MongoDB database.
+* **Docker:** Installed on your system ([https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/))
+* **wget or curl:** Installed on your system (package managers usually handle this)
+
 
 ### Setting Up a Local Atlas Environment
 
